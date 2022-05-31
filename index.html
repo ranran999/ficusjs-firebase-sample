@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bulma.min.css" />
+    <title>Ficusjs & Firebase</title>
+    <script>
+        // 後でDIできるよう小細工
+        if (!globalThis?.process?.env) {
+            globalThis.process = globalThis?.process || {};
+            globalThis.process.env = globalThis.process.env || {};
+            const hashConst = location.hash.substring(1)?.split("?")[1]?.split("&").reduce((o, c) => {
+                const param = c.split("=").map(s => decodeURIComponent(s))
+                o[param[0]] = param[1]
+                return o
+            }, {});
+            globalThis.process.env.configUrl = hashConst?.configUrl;
+        }
+    </script>
+</head>
+
+<body>
+    <component-header></component-header>
+    <component-message></component-message>
+    <section id="router-outlet"></section>
+    <script type="module" src="src/main.js"></script>
+</body>
+
+</html>
