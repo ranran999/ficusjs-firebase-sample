@@ -27,8 +27,8 @@ createComponent('component-header',
       return html`
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="/" @click="${this.noticeMessage}">
-          <img src="/img/logo.png" width="120" height="31" />
+        <a class="navbar-item" href="./" @click="${this.noticeMessage}">
+          <img src="./img/logo.png" width="120" height="31" />
         </a>
     
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" @click="${this.toggleMenu}">
