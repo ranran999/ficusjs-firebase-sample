@@ -63,7 +63,10 @@ createComponent('component-editor',
         }
         this.state.isLoading = false;
       } else {
-        this.firebase = await FirebaseRest.createNode("sample" + Date.now())
+        if (!window.confirm("新規ノードを作成しますか？")) {
+          return
+        }
+        this.firebase = await FirebaseRest.createNode("sample" + Date.now());
         const url = new URL(location.href);
 
         url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
@@ -77,6 +80,9 @@ createComponent('component-editor',
       }
     },
     render() {
+      if (!this.props.jsonUrl) {
+        return html`<h1 class="title">編集するデータが見つかりません。</h1>`
+      }
       return html`
 <section class="hero is-primary is-fullheight-with-navbar">
   <div class="hero-head">

@@ -1,4 +1,4 @@
-import { createComponent, withStore, getAppState } from '../../lib/index.mjs'
+import { createComponent } from '../../lib/index.mjs'
 import { html, renderer } from '../../lib/lit-html.mjs'
 import { router } from '../router.js'
 

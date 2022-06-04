@@ -1,7 +1,7 @@
 
 export class FirebaseRest {
   // FIXME こんなところにURLを書いては行けない
-  static firebseWrapperUrl = process.env.firebseWrapperUrl || "https://firebase-pipe.herokuapp.com"
+  static firebseWrapperUrl = "https://firebase-pipe.herokuapp.com"
   static async createNode(path) {
     const u = new URL(FirebaseRest.firebseWrapperUrl);
     u.searchParams.append("@path", path);
