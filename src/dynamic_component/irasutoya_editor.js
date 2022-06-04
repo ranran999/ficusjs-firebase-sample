@@ -133,7 +133,10 @@ createComponent('component-editor', withStyles({
       }
       this.state.isCreateLoading = false;
     } else {
-      this.firebase = await FirebaseRest.createNode("sample" + Date.now())
+      if (!window.confirm("新規ノードを作成しますか？")) {
+        return
+      }
+      this.firebase = await FirebaseRest.createNode("irasytoya_images" + Date.now())
       const url = new URL(location.href);
 
       url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
@@ -147,6 +150,9 @@ createComponent('component-editor', withStyles({
     }
   },
   render() {
+    if (!this.props.jsonUrl) {
+      return html`<h1 class="title">編集するデータが見つかりません。</h1>`
+    }
     return html`
         <h2 class="title">編集中の画像リスト</h2>
         ${this.state.isCreateLoading ? html`<component-loading></component-loading>` : html`
