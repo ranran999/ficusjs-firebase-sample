@@ -63,10 +63,11 @@ createComponent('component-editor',
         }
         this.state.isLoading = false;
       } else {
-        if (!window.confirm("新規ノードを作成しますか？")) {
+        let prefix = prompt("新規ノードを作成しますか？\nノード名のプリフィックスを入力してください。", "sample");
+        if (!prefix) {
           return
         }
-        this.firebase = await FirebaseRest.createNode("sample" + Date.now());
+        this.firebase = await FirebaseRest.createNode(prefix + Date.now());
         const url = new URL(location.href);
 
         url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
