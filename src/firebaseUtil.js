@@ -60,6 +60,13 @@ export class FirebaseRest {
     }
   }
 
+  child(path) {
+    if (!path) {
+      throw "no path!"
+    }
+    const jsonUrl = this.jsonUrl.substring(0, this.jsonUrl.length - 5) + "/" + path + ".json"
+    return new FirebaseRest(jsonUrl, this.refreshToken);
+  }
   async getJSON() {
     if (this.refreshToken) {
       return await this._privateRequest();
@@ -72,6 +79,21 @@ export class FirebaseRest {
       return await this._privateRequest({ method: "PATCH", body });
     } else {
       return await this._request(null, { method: "PATCH", body })
+    }
+  }
+  async post(body) {
+    if (this.refreshToken) {
+      return await this._privateRequest({ method: "POST", body });
+    } else {
+      return await this._request(null, { method: "POST", body })
+    }
+  }
+  async delete() {
+    // ルートは消せない。childから呼び出された場合のみ動作する。
+    if (this.refreshToken) {
+      return await this._privateRequest({ method: "DELETE" });
+    } else {
+      return await this._request(null, { method: "DELETE" })
     }
   }
 }
