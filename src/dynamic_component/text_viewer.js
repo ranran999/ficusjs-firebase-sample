@@ -42,7 +42,7 @@ createComponent('component-viewer',
       const text = event.target.textContent;
       navigator.clipboard.writeText(clipboardText);
       event.target.textContent = `👏`
-      //setTimeout(() => event.target.textContent = text, 500)
+      setTimeout(() => event.target.textContent = text, 500)
     },
     async created() {
       if (this.props.jsonUrl) {
@@ -68,7 +68,7 @@ createComponent('component-viewer',
         <div class="hero-body">
           <div class="columns is-multiline is-mobile">
             ${this.textList.map(obj => html`
-            <div class="column" style="min-width: fit-content;">
+            <div class="column" style="width: fit-content;">
               <div class="card">
                 <header class="card-header">
                   <p class="card-header-title">
@@ -79,8 +79,9 @@ createComponent('component-viewer',
                   <div class="content">
                     ${obj.text}
                     <br>
+                    <br>
                     <time datetime="${new Date(obj.updatedAt).toLocaleDateString()}">${new
-          Date(obj.updatedAt).toLocaleString()}</time>
+                      Date(obj.updatedAt).toLocaleString()}</time>
                   </div>
                 </div>
                 <footer class="card-footer">
