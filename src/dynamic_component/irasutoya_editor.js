@@ -142,7 +142,7 @@ createComponent('component-editor', withStyles({
       url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
       url.searchParams.set("refreshToken", this.firebase.refreshToken);
 
-      eventBus.publish("show-message", { text: "新規ノードを作成しました。" });
+      eventBus.publish("show-message", { text: "新規ノードを作成しました。URLにアクセストークンを含むため公開しないようにしてください。" });
       router.replace({
         pathname: "/editor",
         search: url.search
@@ -158,10 +158,10 @@ createComponent('component-editor', withStyles({
         ${this.state.isCreateLoading ? html`<component-loading></component-loading>` : html`
         <div class="columns is-multiline is-mobile">
           ${this.state.imagelist.length === 0 ? html`<div class="column">画像を追加してください.</div>` : this.state.imagelist.map(e =>
-          html`
+      html`
           <div class="column is-half-mobile is-one-third-tablet has-background-primary-light ${e.columnClass}">
             <div class="card">
-              <button class="delete is-large" @click=${()=> this.saveImage("delete", e)}></button>
+              <button class="delete is-large" @click=${() => this.saveImage("delete", e)}></button>
               <div class="card-image">
                 <figure class="image is-4by3">
                   <img src="${e.src}" alt="${e.title}">
@@ -185,7 +185,7 @@ createComponent('component-editor', withStyles({
           <div class="column is-half-mobile is-one-third-tablet ${e.columnClass}">
             <div class="card">
               <div class="card-image">
-                <figure class="image is-4by3" @click=${()=> this.saveImage("append", e)}>
+                <figure class="image is-4by3" @click=${() => this.saveImage("append", e)}>
                   <img src="${e.src}" alt="${e.title}">
                 </figure>
               </div>

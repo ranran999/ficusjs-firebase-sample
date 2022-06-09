@@ -73,7 +73,7 @@ createComponent('component-editor',
         url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
         url.searchParams.set("refreshToken", this.firebase.refreshToken);
 
-        eventBus.publish("show-message", { text: "新規ノードを作成しました。" });
+        eventBus.publish("show-message", { text: "新規ノードを作成しました。URLにアクセストークンを含むため公開しないようにしてください。" });
         router.replace({
           pathname: "/editor",
           search: url.search

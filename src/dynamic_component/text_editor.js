@@ -140,7 +140,7 @@ createComponent('component-editor',
         url.searchParams.set("jsonUrl", this.firebase.jsonUrl);
         url.searchParams.set("refreshToken", this.firebase.refreshToken);
 
-        eventBus.publish("show-message", { text: "新規ノードを作成しました。" });
+        eventBus.publish("show-message", { text: "新規ノードを作成しました。URLにアクセストークンを含むため公開しないようにしてください。" });
         router.replace({
           pathname: "/editor",
           search: url.search
@@ -209,7 +209,7 @@ createComponent('component-editor',
   <div class="modal-card">
     <header class="modal-card-head">
       <div class="modal-card-title">
-        <input type="text" class="text" placeholder="title"
+        <input type="text" class="input" placeholder="title"
           @change="${(event) => this.changeValue('editTitle', event.target.value)}" .value="${this.state.editTitle}">
       </div>
       <button class="delete" aria-label="close" @click="${() => this.state.isEditMode = false}"></button>
