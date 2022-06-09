@@ -41,9 +41,15 @@ class Config {
   constructor(configUrl) {
     this.importPromise = {}
     if (configUrl) {
-      //TODO: routerを介してDIされたことを警告する
-      //throw "no data."
-      this.configPromise = fetch(configUrl).then(r => r.json());
+      // クロスドメインのモジュール読み込みは制限しておく
+      this.configPromise = fetch(configUrl).then(r => r.json()).then(json => {
+        Object.keys(json).forEach(key => {
+          if (new URL(json[key].url, location.href).origin !== location.origin) {
+            throw "クロスドメインのモジュールは読み込めません。url:" + json[key].url
+          }
+        })
+        return json;
+      })
     } else {
       this.configPromise = Promise.resolve({
         title: "JSON情報の読み書き",
